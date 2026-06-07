@@ -1,0 +1,29 @@
+projeto_xml_financeiro/
+│
+├── main.py
+│
+├── database.py
+├── models.py
+│
+├── database/
+│   └── financeiro.db
+│
+├── services/
+│   ├── xml_importer.py
+│   ├── xml_parser.py
+│   ├── csv_exporter.py
+│   └── report_service.py
+│
+├── utils/
+│   ├── helpers.py
+│   ├── formatters.py
+│   └── validations.py
+│
+├── logs/
+│
+├── exports/
+│
+├── xmls/
+│
+└── ui/
+    └── (PySide6 futuramente)

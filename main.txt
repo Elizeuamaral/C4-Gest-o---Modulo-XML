@@ -1,0 +1,56 @@
+from pathlib import Path
+
+from database import init_db
+from services.xml_importer import XMLImporter
+from services.csv_exporter import CSVExporter
+
+
+def importar_todos_xmls():
+
+    pasta_xml = Path("xmls")
+
+    if not pasta_xml.exists():
+        print("Pasta xmls não encontrada.")
+        return
+
+    arquivos_xml = list(pasta_xml.glob("*.xml"))
+
+    if not arquivos_xml:
+        print("Nenhum XML encontrado.")
+        return
+
+    importer = XMLImporter()
+
+    print(f"\nTotal de XMLs encontrados: {len(arquivos_xml)}\n")
+
+    for arquivo in arquivos_xml:
+
+        print(f"Importando: {arquivo.name}")
+
+        resultado = importer.importar_xml(arquivo)
+
+        print(resultado)
+        print("-" * 50)
+
+
+if __name__ == "__main__":
+
+    # Cria banco/tabelas
+    init_db()
+
+    # Importa XMLs
+    importar_todos_xmls()
+    
+    # =========================
+    # Exportação CSV
+    # =========================
+
+    exporter = CSVExporter()
+
+    arquivos = exporter.exportar_todos()
+
+    print("\nCSV gerados com sucesso:\n")
+
+    for nome, caminho in arquivos.items():
+
+        print(f"{nome}: {caminho}")
